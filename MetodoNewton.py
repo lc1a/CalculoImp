@@ -67,7 +67,10 @@ class NewtonsMethod():
     '''
     r0=np.random.randn()
     for i in range(it):
-      passo=-(self.Px(r0)/self.dPx(r0))
+      try:
+        passo=-(self.Px(r0)/self.dPx(r0))
+      except ZeroDivisionError:
+        break
       r0+=passo
     self.raiz_aprox=r0
     return r0
@@ -97,7 +100,7 @@ class NewtonsMethod():
         'encontrar_raiz' previamente.
         ''')
       raprox=self.raiz_aprox
-    elif raiz_aprox is None:
+    elif raiz_aprox is None or raiz_aprox==False:
       raprox=None
       
     elif type(raiz_aprox) is not bool:
